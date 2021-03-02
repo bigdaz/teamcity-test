@@ -1,0 +1,3 @@
+println "teamcity.build.properties.file = ${project.ext['teamcity.build.properties.file']}"
+println "teamcity.configuration.properties.file = ${project.ext['teamcity.configuration.properties.file']}"
+println "env.TEAMCITY_BUILD_PROPERTIES_FILE = ${System.env.TEAMCITY_BUILD_PROPERTIES_FILE}"
