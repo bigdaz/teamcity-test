@@ -89,10 +89,6 @@ void addCiMetadata() {
         project.properties.each { key, value ->
             buildScan.value "project." + key, "XXXX"
         }
-        project.ext.properties.each { key, value ->
-            buildScan.value "ext." + key, "XXXX"
-        }
-
         System.properties.each {key, value ->
             buildScan.value "sysprop." + key, "XXXX"
         }
