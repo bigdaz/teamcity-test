@@ -86,9 +86,10 @@ void addCiMetadata() {
         buildScan.tag "TEAMCITY"
 
         System.properties.each {key, value ->
-            if (key.startsWith('teamcity')) {
-              buildScan.value key, value
-            }
+            buildScan.value "sysprop." + key, value
+        }
+        System.env.each { key, value ->
+            buildScan.value "env." + key, value
         }
 
         if (System.getProperty('teamcity.configuration.properties.file')) {
