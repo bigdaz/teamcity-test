@@ -1,0 +1,16 @@
+plugins {
+  id "com.gradle.enterprise" version "3.5.2"
+}
+
+gradleEnterprise {
+    server = "https://e.grdev.net"
+    allowUntrustedServer = true
+
+    buildScan {
+        publishAlways()
+        captureTaskInputFiles = true
+    }
+}
+
+rootProject.name = 'teamcity-test'
+include('lib')
