@@ -86,6 +86,7 @@ void addCiMetadata() {
     if (isTeamCity()) {
         buildScan.tag "TEAMCITY"
 
+/*
         project.properties.each { key, value ->
             buildScan.value "project." + key, "XXXX"
         }
@@ -95,22 +96,22 @@ void addCiMetadata() {
         System.env.each { key, value ->
             buildScan.value "env." + key, "XXXX"
         }
-
-        if (System.getProperty('teamcity.configuration.properties.file')) {
-            def properties = readPropertiesFile(System.getProperty('teamcity.configuration.properties.file'))
+*/
+        if (project.getProperty('teamcity.configuration.properties.file')) {
+            def properties = readPropertiesFile(project.getProperty('teamcity.configuration.properties.file'))
             def teamCityServerUrl = properties.getProperty('teamcity.serverUrl')
-            if (teamCityServerUrl && System.getProperty('build.number') && System.getProperty('teamcity.buildType.id')) {
-                def buildNumber = System.getProperty('build.number')
-                def buildTypeId = System.getProperty('teamcity.buildType.id')
+            if (teamCityServerUrl && project.getProperty('build.number') && project.getProperty('teamcity.buildType.id')) {
+                def buildNumber = project.getProperty('build.number')
+                def buildTypeId = project.getProperty('teamcity.buildType.id')
                 buildScan.link 'TeamCity build', "${appendIfMissing(teamCityServerUrl, '/')}viewLog.html?buildNumber=${buildNumber}&buildTypeId=${buildTypeId}"
             }
         }
-        if (System.getProperty('build.number')) {
-            buildScan.value 'CI build number', System.getProperty('build.number')
+        if (project.getProperty('build.number')) {
+            buildScan.value 'CI build number', project.getProperty('build.number')
         }
-        if (System.getProperty('agent.name')) {
+        if (project.getProperty('agent.name')) {
             def agentNameLabel = 'CI agent'
-            def agentName = System.getProperty('agent.name')
+            def agentName = project.getProperty('agent.name')
             buildScan.value agentNameLabel, agentName
             addCustomLinkWithSearchTerms buildScan, 'CI agent build scans', [(agentNameLabel): agentName]
         }
