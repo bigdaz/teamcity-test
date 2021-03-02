@@ -83,6 +83,7 @@ void addCiMetadata() {
     }
 
     if (isTeamCity()) {
+        buildScan.tag "TEAMCITY"
         if (System.getProperty('teamcity.configuration.properties.file')) {
             def properties = readPropertiesFile(System.getProperty('teamcity.configuration.properties.file'))
             def teamCityServerUrl = properties.getProperty('teamcity.serverUrl')
